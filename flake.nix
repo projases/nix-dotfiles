@@ -1,0 +1,60 @@
+{
+  description = "NixOS configuration";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:projases/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
+    };
+  };
+
+  outputs = { self, nixpkgs, home-manager, sf-mono-liga-src, zen-browser, ... }@inputs:
+
+  let 
+  overlays = import ./overlays { inherit sf-mono-liga-src; };
+
+  mkHost = hostPath: nixpkgs.lib.nixosSystem {
+    specialArgs = { inherit inputs; };
+
+    modules = [
+      "${hostPath}/hardware-configuration.nix"
+      "${hostPath}/configuration.nix"
+
+      # make overlay visible to this host
+      { nixpkgs.overlays = [ overlays.sf-mono-liga overlays.lager-boost-fix ]; }
+
+      inputs.noctalia.nixosModules.default
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.pablo = import ./home-manager/home.nix;
+          extraSpecialArgs = { inherit inputs zen-browser; };
+        };
+      }
+    ];
+  };
+  in {
+    nixosConfigurations.laniakea = mkHost ./systems/laniakea;
+    nixosConfigurations.macnix  = mkHost ./systems/macnix;
+  };
+}

@@ -1,0 +1,41 @@
+{ config, lib, pkgs, ... }:
+
+{
+  programs.wleave = {
+    enable = true;
+    package = pkgs.wleave;
+  };
+
+  layout = [
+    {
+      "label" = "lock";
+      "action" = "swaylock";
+      "text" = "Lock";
+      "keybind" = "l";
+    }
+    {
+      "label" = "softboot";
+      "action" = "systemctl soft-reboot";
+      "text" = "Soft Reboot";
+      "keybind" = "b";
+    }
+    {
+      "label" = "reboot";
+      "action" = "systemctl reboot";
+      "text" = "Reboot";
+      "keybind" = "r";
+    }
+    {
+      "label" = "shutdown";
+      "action" = "systemctl poweroff";
+      "text" = "Shutdown";
+      "keybind" = "s";
+    }
+    {
+      "label" = "logout";
+      "action" = "hyprctl dispatch exit 0";
+      "text" = "Logout";
+      "keybind" = "e";
+    }
+  ];
+}
