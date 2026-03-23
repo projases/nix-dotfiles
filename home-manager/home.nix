@@ -105,6 +105,7 @@ in
     iproute2
     wl-clipboard
     gh
+    opencode
 
     #Appearance
     kora-icon-theme

@@ -23,12 +23,15 @@
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
     };
+
+    opencode-nix.url = "github:dominicnunez/opencode-nix";
+
   };
 
-  outputs = { self, nixpkgs, home-manager, sf-mono-liga-src, zen-browser, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, sf-mono-liga-src, zen-browser, opencode-nix, ... }@inputs:
 
   let 
-  overlays = import ./overlays { inherit sf-mono-liga-src; };
+    overlays = import ./overlays { inherit sf-mono-liga-src; };
 
   mkHost = hostPath: nixpkgs.lib.nixosSystem {
     specialArgs = { inherit inputs; };
@@ -38,7 +41,12 @@
       "${hostPath}/configuration.nix"
 
       # make overlay visible to this host
-      { nixpkgs.overlays = [ overlays.sf-mono-liga overlays.lager-boost-fix ]; }
+      { nixpkgs.overlays = [
+          overlays.sf-mono-liga
+          overlays.lager-boost-fix
+          inputs.opencode-nix.overlays.default
+        ];
+      }
 
       inputs.noctalia.nixosModules.default
 
