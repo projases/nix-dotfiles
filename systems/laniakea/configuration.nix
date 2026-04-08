@@ -61,6 +61,10 @@
   # clipboard = true;
   # seamless = true;
   # };
+   
+  #Enable docker
+  virtualisation.docker.enable = true;
+  
   services.gnome.gnome-online-accounts.enable = true;
   services.accounts-daemon.enable = true;
   # Enable the Pantheon Desktop Environment.
@@ -87,7 +91,6 @@
     };
   };
 
-
   #Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -97,6 +100,7 @@
     variant = "";
   };
 
+  # Apache Kafka
   # Enable postgreSQL
   services.postgresql = {
     enable = true;
@@ -145,7 +149,7 @@
   users.users.pablo = {
     isNormalUser = true;
     description = "Pablo Rojas Espejel";
-    extraGroups = [ "plugdev" "networkmanager" "wheel" "video" "input" "render" "vboxusers" "wireshark" ];
+    extraGroups = [ "docker" "plugdev" "networkmanager" "wheel" "video" "input" "render" "vboxusers" "wireshark" ];
     shell = pkgs.fish;
     packages = with pkgs; [
     #  thunderbird
@@ -181,10 +185,10 @@
     libXtst
   ];
 
-  services.hypridle = {
-    enable = true;
-    package = pkgs.hypridle;
-  };
+  # services.hypridle = {
+  #   enable = true;
+  #   package = pkgs.hypridle;
+  # };
   #Shells
   environment.shells = with pkgs; [fish zsh bash nushell ];
 
@@ -204,6 +208,9 @@
     webkitgtk_4_1
     wally-cli
     keymapp
+
+    # Docker
+    docker-compose
 
     # C 
     gcc

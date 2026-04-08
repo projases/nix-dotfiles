@@ -2,7 +2,6 @@
 .idea
 *.log
 tmp/
-*.pem
 *.key
 *.pub
 .env
