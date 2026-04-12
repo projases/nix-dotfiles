@@ -156,7 +156,8 @@
     ];
   };
 
-
+  
+  programs.direnv.enable = true;
   programs.fish.enable = true;
   programs.hyprland.enable = true;
   programs.niri.enable = true;
