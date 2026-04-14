@@ -183,7 +183,7 @@
         locations."/stat.xsl" = {
           root = "/var/www/html/rtmp";
         };
-        location."/control" = {
+        locations."/control" = {
           extraConfig = ''
             rtmp_control all;
           '';
@@ -204,6 +204,7 @@
           '';
         };
       };
+    };
   };
 
   # Group needed for configuring udev rules for ZSA keyboards
