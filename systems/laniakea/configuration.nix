@@ -143,6 +143,69 @@
      ./certs/uoc-chain.pem
    ];
 
+  # Enable nginx with rtmp module
+  services.nginx = {
+    enable = true;
+    package = (pkgs.nginx.override {
+      modules = [ pkgs.nginxModules.rtmp ];
+    });
+    appendConfig = ''
+      rtmp {
+        server {
+          listen 1935;
+          chunk_size 4096;
+          allow publish all;
+          application live {
+            live on;
+            record off;
+
+            hls on;
+            hls_path /var/www/html/stream/hls;
+            hls_fragment 3;
+            hls_playlist_length 60;
+
+            dash on;
+            dash_path /var/www/html/stream/dash;
+          }
+        }
+      }
+    '';
+
+    virtualHosts = {
+      "rtmp-stats" = {
+        listen = [ { addr = "0.0.0.0"; port = 8080; } ];
+        locations."/stat" = {
+          extraConfig = ''
+            rtmp_stat all;
+            rtmp_stat_stylesheet stat.xsl;
+          '';
+        };
+        locations."/stat.xsl" = {
+          root = "/var/www/html/rtmp";
+        };
+        location."/control" = {
+          extraConfig = ''
+            rtmp_control all;
+          '';
+        };
+      };
+
+      #HLS/DASH streaming virtual host
+      "streaming-video" = {
+        listen = [ { addr = "0.0.0.0"; port = 8088; } ];
+        locations."/" = {
+          root = "/var/www/html/stream";
+          extraConfig = ''
+            add_header Access-Control-Allow-Origin *;
+            types {
+              application/dash+xml mpd;
+              application/vnd.apple.mpegurl m3u8;
+            }
+          '';
+        };
+      };
+  };
+
   # Group needed for configuring udev rules for ZSA keyboards
   users.groups.plugdev = { };
   # Define a user account. Don't forget to set a password with ‘passwd’.
