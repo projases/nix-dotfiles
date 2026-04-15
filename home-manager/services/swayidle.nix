@@ -12,7 +12,7 @@
   in
     {
     enable = true;
-    systemdTarget = "niri-session.target";
+    systemdTarget = "graphical-session.target";
     timeouts = [
       {
         timeout = 295;

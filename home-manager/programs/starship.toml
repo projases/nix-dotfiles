@@ -17,6 +17,8 @@ $c\
 $nix_shell\
 [](fg:#5b94ab bg:#34373e)\
 $time\
+[](fg:#34373e bg:#34373e)\
+$username\
 [ ](fg:#34373e)\
 \n$character"""
 
@@ -84,7 +86,12 @@ format = '[[ $symbol ($version) ](fg:#d3d3d3 bg:#5b94ab)]($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
+time_format = "%H:%M %a %d %b" # Hour:Minute Format
 style = "bg:#34373e"
 format = '[[  $time ](fg:#c9d9ff bg:#34373e)]($style)'
 
+[username]
+show_always = true
+disabled = false
+style_user = "bg:#34373e"
+format = "[[$user](fg:#c9d9ff bg:#34373e)]($style)"

@@ -106,6 +106,7 @@ in
     wl-clipboard
     gh
     opencode
+    ffmpeg
 
     #Appearance
     kora-icon-theme

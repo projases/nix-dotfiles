@@ -155,9 +155,12 @@
           listen 1935;
           chunk_size 4096;
           allow publish all;
+          ping 30s;
           application live {
             live on;
             record off;
+            push rtmp://youtube.com/live2/**************;
+            push_reconnect 1s;
 
             hls on;
             hls_path /var/www/html/stream/hls;
@@ -172,6 +175,13 @@
     '';
 
     virtualHosts = {
+      "default" = {
+        listen = [ { addr = "0.0.0.0"; port = 80; } ];
+        locations."/" = {
+          root = "/var/www/html";
+        };
+      };
+
       "rtmp-stats" = {
         listen = [ { addr = "0.0.0.0"; port = 8080; } ];
         locations."/stat" = {
@@ -205,6 +215,10 @@
         };
       };
     };
+  };
+
+  systemd.services.nginx.serviceConfig = {
+    ReadWritePaths = [ "/var/www/html" ];
   };
 
   # Group needed for configuring udev rules for ZSA keyboards
