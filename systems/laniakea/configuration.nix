@@ -245,11 +245,11 @@
   programs.niri.enable = true;
   programs.dconf.enable = true;
   programs.zsh.enable = true;
-  programs.wireshark = {
-    enable = true;
-    package = pkgs.wireshark;
-    dumpcap.enable = true;
-  };
+  # programs.wireshark = {
+  #   enable = true;
+  #   package = pkgs.wireshark;
+  #   dumpcap.enable = true;
+  # };
   programs.java = {
     enable = true;
     package = pkgs.jdk;
@@ -291,6 +291,7 @@
     webkitgtk_4_1
     wally-cli
     keymapp
+    claude-agent-acp
 
     # Docker
     docker-compose
@@ -312,8 +313,8 @@
 
     # JS 
     nodejs
-    nodePackages.typescript
-    nodePackages.typescript-language-server
+    typescript
+    typescript-language-server
     copilot-language-server
 
     # Haskell 

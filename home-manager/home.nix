@@ -92,10 +92,9 @@ in
     valgrind
     ispell
     ghostty
-    nodejs
     yasm
     gajim
-    nodePackages.katex
+    katex
     nix-prefetch-git
     nix-prefetch-github
     eza
@@ -108,7 +107,6 @@ in
     opencode
     ffmpeg
     inputs.nix-claude-code.packages."${pkgs.system}".default
-    inputs.nix-claude-code.packages."${pkgs.system}".claude-agent-acp
 
     #Appearance
     kora-icon-theme
@@ -169,12 +167,12 @@ in
     obs-studio
     xournalpp
     pdfarranger
-    wasistlos
+    karere 
     texlivePackages.latexmk
     texliveFull
     openboard
     brave
-    krita
+    # krita
     jetbrains.idea-oss
     jetbrains.idea
     geany

@@ -46,6 +46,7 @@
       { nixpkgs.overlays = [
           overlays.sf-mono-liga
           overlays.lager-boost-fix
+          overlays.wireshark-fix
           inputs.opencode-nix.overlays.default
           inputs.nix-claude-code.overlays.default
         ];
