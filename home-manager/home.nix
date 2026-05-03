@@ -107,6 +107,8 @@ in
     gh
     opencode
     ffmpeg
+    inputs.nix-claude-code.packages."${pkgs.system}".default
+    inputs.nix-claude-code.packages."${pkgs.system}".claude-agent-acp
 
     #Appearance
     kora-icon-theme

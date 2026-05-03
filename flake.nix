@@ -26,9 +26,11 @@
 
     opencode-nix.url = "github:dominicnunez/opencode-nix";
 
+    nix-claude-code.url = "github:ryoppippi/nix-claude-code";
+
   };
 
-  outputs = { self, nixpkgs, home-manager, sf-mono-liga-src, zen-browser, opencode-nix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, sf-mono-liga-src, zen-browser, opencode-nix, nix-claude-code, ... }@inputs:
 
   let 
     overlays = import ./overlays { inherit sf-mono-liga-src; };
@@ -45,6 +47,7 @@
           overlays.sf-mono-liga
           overlays.lager-boost-fix
           inputs.opencode-nix.overlays.default
+          inputs.nix-claude-code.overlays.default
         ];
       }
 

@@ -154,13 +154,16 @@
         server {
           listen 1935;
           chunk_size 4096;
-          allow publish all;
+          allow publish 127.0.0.1;
+          allow publish 192.168.1.137;
+          deny publish all;
+
           ping 30s;
           application live {
             live on;
             record off;
-            push rtmp://youtube.com/live2/**************;
-            push_reconnect 1s;
+            # push rtmp://a.rtmp.youtube.com/live2/8hrj-qa02-tf24-33ud-1188;
+            # push_reconnect 1s;
 
             hls on;
             hls_path /var/www/html/stream/hls;
@@ -179,6 +182,7 @@
         listen = [ { addr = "0.0.0.0"; port = 80; } ];
         locations."/" = {
           root = "/var/www/html";
+          index = "index.html";
         };
       };
 
