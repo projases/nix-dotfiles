@@ -106,7 +106,7 @@ in
     gh
     opencode
     ffmpeg
-    inputs.nix-claude-code.packages."${pkgs.system}".default
+    inputs.nix-claude-code.packages."${pkgs.stdenv.hostPlatform.system}".default
 
     #Appearance
     kora-icon-theme
@@ -162,7 +162,7 @@ in
     webcord
     helix
     # julia
-    zen-browser.packages."${pkgs.system}".default
+    zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
     transmission_4
     obs-studio
     xournalpp
@@ -186,7 +186,7 @@ in
     weechat
     (python3.withPackages (ps: [ ps.jupyter ps.matplotlib ]))
     wireguard-tools
-    protonvpn-gui
+    proton-vpn
     unzip
     pgadmin4-desktopmode
   ];

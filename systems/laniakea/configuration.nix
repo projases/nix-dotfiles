@@ -245,11 +245,11 @@
   programs.niri.enable = true;
   programs.dconf.enable = true;
   programs.zsh.enable = true;
-  # programs.wireshark = {
-  #   enable = true;
-  #   package = pkgs.wireshark;
-  #   dumpcap.enable = true;
-  # };
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+    dumpcap.enable = true;
+  };
   programs.java = {
     enable = true;
     package = pkgs.jdk;

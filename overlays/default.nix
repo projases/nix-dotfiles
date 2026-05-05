@@ -24,9 +24,8 @@
     });
   };
 
-  # This matches 'overlays.wireshark-fix' in your flake
   wireshark-fix = final: prev: {
-    wireshark-qt = prev.wireshark-qt.overrideAttrs (old: {
+    wireshark = prev.wireshark.overrideAttrs (old: {
       version = "4.6.5";
       src = prev.fetchFromGitLab {
         owner = "wireshark";

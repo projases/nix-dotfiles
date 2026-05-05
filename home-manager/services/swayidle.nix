@@ -6,13 +6,13 @@
 }: {
   services.swayidle = 
   let
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     lock = "${inputs.noctalia.packages.${system}.default}/bin/noctalia-shell ipc call lockScreen lock";
     display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
   in
     {
     enable = true;
-    systemdTargets = ["graphical-session.target"];
+    systemdTargets = ["niri.target"];
     timeouts = [
       {
         timeout = 295;
