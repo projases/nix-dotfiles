@@ -14,14 +14,14 @@
     enable = true;
     systemdTargets = ["graphical-session.target" "niri-session.target"];
     
-    # 1. Force the screen to lock and displays to handle state BEFORE sleeping
-    events = [
-      { event = "before-sleep"; command = "${lock}; ${display "off"}"; }
-    ];
+    # Updated: Now an attribute set keyed by the event name
+    events = {
+      before-sleep = "${lock}; ${display "off"}";
+    };
 
     timeouts = [
       {
-        timeout = 400;
+        timeout = 295;
         command = lock; 
       }
       {
