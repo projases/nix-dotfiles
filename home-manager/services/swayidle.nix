@@ -12,10 +12,16 @@
   in
     {
     enable = true;
-    systemdTargets = ["niri.target"];
+    systemdTargets = ["graphical-session.target" "niri-session.target"];
+    
+    # 1. Force the screen to lock and displays to handle state BEFORE sleeping
+    events = [
+      { event = "before-sleep"; command = "${lock}; ${display "off"}"; }
+    ];
+
     timeouts = [
       {
-        timeout = 295;
+        timeout = 400;
         command = lock; 
       }
       {

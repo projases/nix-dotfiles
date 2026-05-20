@@ -26,6 +26,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocales = [ "en_GB.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ]; 
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "es_ES.UTF-8";
@@ -104,6 +105,13 @@
   # Enable postgreSQL
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_18;
+    initdbArgs = [ "--locale=en_GB.UTF-8" "--encoding=UTF8" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+        local all all              trust
+        host  all all 127.0.0.1/32 md5
+        host  all all ::1/128       md5
+    '';
   };
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -204,18 +212,25 @@
         };
       };
 
-      #HLS/DASH streaming virtual host
+      # HLS/DASH streaming virtual host
       "streaming-video" = {
         listen = [ { addr = "0.0.0.0"; port = 8088; } ];
-        locations."/" = {
+
+        locations."/hls" = {
           root = "/var/www/html/stream";
           extraConfig = ''
             add_header Access-Control-Allow-Origin *;
-            types {
-              application/dash+xml mpd;
-              application/vnd.apple.mpegurl m3u8;
-            }
-          '';
+            '';
+        };
+
+        locations."/dash" = {
+          root = "/var/www/html/stream";
+          extraConfig = ''
+            add_header Access-Control-Allow-Origin *;
+                types {
+                    application/dash+xml mpd;
+                }
+            '';
         };
       };
     };
@@ -292,6 +307,8 @@
     wally-cli
     keymapp
     claude-agent-acp
+    postman
+    bruno
 
     # Docker
     docker-compose
@@ -340,7 +357,7 @@
     cacert
     gradle
     
-    inputs.noctalia.packages.${system}.default
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     # Emacs
     # emacs-pgtk
 

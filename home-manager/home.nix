@@ -133,7 +133,6 @@ in
 
     
     #daemons
-    mako
     mpd
 
     #Hyprland

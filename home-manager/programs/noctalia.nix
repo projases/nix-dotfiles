@@ -33,6 +33,7 @@
 
       notifications = {
         enabled = true;
+        density = "default";
         monitors = [ ];
         location = "top_right";
         overlayLayer = true;
@@ -41,6 +42,7 @@
         lowUrgencyDuration = 3;
         normalUrgencyDuration = 8;
         criticalUrgencyDuration = 15;
+        clearDismissed = true;
         enableKeyboardLayoutToast = true;
       };
 
