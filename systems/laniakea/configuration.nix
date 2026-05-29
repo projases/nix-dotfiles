@@ -48,20 +48,25 @@
   # Enable AMD GPU firmware
   hardware.firmware = [ pkgs.linux-firmware ];
 
+  #Enable virt manager
+  virtualisation.libvirtd.enable = true;
+  programs.virtmanager.enable = true;
+  
   # Enable virtual box
-  # virtualisation.virtualbox.host = {
-  # enable = true;
-  # package = pkgs.virtualbox;
-  # enableExtensionPack = true;
-  # enableKvm = true;
-  # addNetworkInterface = false;
-  # };
-  # virtualisation.virtualbox.guest = {
-  # enable = true;
-  # dragAndDrop = true;
-  # clipboard = true;
-  # seamless = true;
-  # };
+  virtualisation.virtualbox.host = {
+  enable = true;
+  package = pkgs.virtualbox;
+  enableExtensionPack = true;
+  enableKvm = false;
+  addNetworkInterface = true;
+
+  };
+  virtualisation.virtualbox.guest = {
+  enable = true;
+  dragAndDrop = true;
+  clipboard = true;
+  seamless = true;
+  };
    
   #Enable docker
   virtualisation.docker.enable = true;
@@ -153,7 +158,7 @@
 
   # Enable nginx with rtmp module
   services.nginx = {
-    enable = true;
+    enable = false;
     package = (pkgs.nginx.override {
       modules = [ pkgs.nginxModules.rtmp ];
     });
@@ -246,7 +251,7 @@
   users.users.pablo = {
     isNormalUser = true;
     description = "Pablo Rojas Espejel";
-    extraGroups = [ "docker" "plugdev" "networkmanager" "wheel" "video" "input" "render" "vboxusers" "wireshark" ];
+    extraGroups = [ "libvirtd" "docker" "plugdev" "networkmanager" "wheel" "video" "input" "render" "vboxusers" "wireshark" ];
     shell = pkgs.fish;
     packages = with pkgs; [
     #  thunderbird
@@ -347,6 +352,8 @@
     vscode-fhs
     warp-terminal
     kitty
+    dnsmasq
+    virtiofsd
 
     # Java
     maven

@@ -189,6 +189,7 @@ in
     unzip
     pgadmin4-desktopmode
     gemini-cli
+    typst
   ];
 
     # It is sometimes useful to fine-tune packages, for example, by applying
