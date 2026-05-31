@@ -28,9 +28,11 @@
 
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
 
+    mistral-vibe.url = "github:mistralai/mistral-vibe";
+
   };
 
-  outputs = { self, nixpkgs, home-manager, sf-mono-liga-src, zen-browser, opencode-nix, nix-claude-code, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mistral-vibe, sf-mono-liga-src, zen-browser, opencode-nix, nix-claude-code, ... }@inputs:
 
   let 
     overlays = import ./overlays { inherit sf-mono-liga-src; };
@@ -49,6 +51,7 @@
           overlays.wireshark-fix
           inputs.opencode-nix.overlays.default
           inputs.nix-claude-code.overlays.default
+          inputs.mistral-vibe.overlays.default
         ];
       }
 

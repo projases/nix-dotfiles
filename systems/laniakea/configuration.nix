@@ -50,7 +50,7 @@
 
   #Enable virt manager
   virtualisation.libvirtd.enable = true;
-  programs.virtmanager.enable = true;
+  programs.virt-manager.enable = true;
   
   # Enable virtual box
   virtualisation.virtualbox.host = {

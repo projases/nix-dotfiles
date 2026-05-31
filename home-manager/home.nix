@@ -107,6 +107,7 @@ in
     opencode
     ffmpeg
     inputs.nix-claude-code.packages."${pkgs.stdenv.hostPlatform.system}".default
+    nmap
 
     #Appearance
     kora-icon-theme
