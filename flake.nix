@@ -51,7 +51,6 @@
           overlays.wireshark-fix
           inputs.opencode-nix.overlays.default
           inputs.nix-claude-code.overlays.default
-          inputs.mistral-vibe.overlays.default
         ];
       }
 
