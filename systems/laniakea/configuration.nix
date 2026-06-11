@@ -77,7 +77,7 @@
   # Enable the Cosmic Desktop Environment.
   services.desktopManager.cosmic.enable = true;
 
-  services.displayManager.defaultSession = "pantheon-wayland";
+  services.displayManager.defaultSession = "niri";
   services.xserver.displayManager.lightdm = {
     enable = true;
     background = "/etc/lightdm/cows.jpg";

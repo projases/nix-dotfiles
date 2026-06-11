@@ -69,6 +69,12 @@ in
     ];
   };
 
+  xdg.mimeApps.defaultApplications = {
+    "text/plain" = "emacsclient.desktop";
+    "application/pdf" = "org.pwmt.zathura.desktop";
+    "video/*" = "vlc.desktop";
+  };
+
   # services.blueman-applet.enable = true;
   #(import stylix).homeManagerModules.stylix
   # The home.packages option allows you to install Nix packages into your
@@ -193,6 +199,7 @@ in
     pgadmin4-desktopmode
     gemini-cli
     typst
+    zathura
   ];
 
     # It is sometimes useful to fine-tune packages, for example, by applying
