@@ -74,8 +74,8 @@
   
   services.gnome.gnome-online-accounts.enable = true;
   services.accounts-daemon.enable = true;
-  # Enable the Pantheon Desktop Environment.
-  services.desktopManager.pantheon.enable = true;
+  # Enable the Cosmic Desktop Environment.
+  services.desktopManager.cosmic.enable = true;
 
   services.displayManager.defaultSession = "pantheon-wayland";
   services.xserver.displayManager.lightdm = {
@@ -264,7 +264,7 @@
   
   programs.direnv.enable = true;
   programs.fish.enable = true;
-  programs.hyprland.enable = true;
+  # programs.hyprland.enable = true;
   programs.niri.enable = true;
   programs.dconf.enable = true;
   programs.zsh.enable = true;
@@ -370,8 +370,6 @@
     gradle
     
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    # Emacs
-    # emacs-pgtk
 
   ];
   fonts.packages = with pkgs; [
@@ -402,10 +400,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   environment.variables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";

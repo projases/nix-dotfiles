@@ -58,6 +58,8 @@ in
   #   package = pkgs.emacs;
   #   startWithUserSession = true;
   # };
+  services.syncthing.enable = true;
+
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
@@ -109,7 +111,7 @@ in
     inputs.nix-claude-code.packages."${pkgs.stdenv.hostPlatform.system}".default
     inputs.mistral-vibe.packages."${pkgs.stdenv.hostPlatform.system}".default
     nmap
-    gnupg
+    # gnupg
     pinentry-all
     openssl
     pandoc
@@ -137,28 +139,21 @@ in
     #Niri
     xwayland-satellite
     swayidle
-
     
     #daemons
     mpd
 
     #Hyprland
     pamixer
-    waybar
-    hyprpaper
     fuzzel
-    wlogout
-    wleave
     networkmanagerapplet
     brightnessctl
     playerctl
     glib
     gsettings-desktop-schemas
     hyprcursor
-    nautilus
 
     #Apps
-    alacritty
     kitty
     spotify
     vlc
@@ -194,6 +189,7 @@ in
     wireguard-tools
     proton-vpn
     unzip
+    zip
     pgadmin4-desktopmode
     gemini-cli
     typst
