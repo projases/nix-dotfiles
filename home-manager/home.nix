@@ -109,6 +109,11 @@ in
     inputs.nix-claude-code.packages."${pkgs.stdenv.hostPlatform.system}".default
     inputs.mistral-vibe.packages."${pkgs.stdenv.hostPlatform.system}".default
     nmap
+    gnupg
+    pinentry-all
+    openssl
+    pandoc
+    zip
 
     #Appearance
     kora-icon-theme

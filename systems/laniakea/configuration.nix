@@ -45,6 +45,7 @@
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.graphics.enable = true;
   hardware.amdgpu.initrd.enable = true;
+
   # Enable AMD GPU firmware
   hardware.firmware = [ pkgs.linux-firmware ];
 
@@ -106,18 +107,20 @@
     variant = "";
   };
 
-  # Apache Kafka
+  # Apache HTTP server
   # Enable postgreSQL
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_18;
-    initdbArgs = [ "--locale=en_GB.UTF-8" "--encoding=UTF8" ];
-    authentication = pkgs.lib.mkOverride 10 ''
-        local all all              trust
-        host  all all 127.0.0.1/32 md5
-        host  all all ::1/128       md5
-    '';
+    # initdbArgs = [ "--locale=en_GB.UTF-8" "--encoding=UTF8" ];
+    # authentication = pkgs.lib.mkOverride 10 ''
+    #     local all all              trust
+    #     host  all all 127.0.0.1/32 md5
+    #     host  all all ::1/128       md5
+    # '';
   };
+
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
  #enable bluetooth
@@ -134,7 +137,7 @@
   services.blueman.enable = true;
 
   # Enable sound with pipewire.
- services.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -314,6 +317,8 @@
     claude-agent-acp
     postman
     bruno
+    openssl
+    
 
     # Docker
     docker-compose
