@@ -70,9 +70,11 @@ in
   };
 
   xdg.mimeApps.defaultApplications = {
+    enable = true;
     "text/plain" = "emacsclient.desktop";
     "application/pdf" = "org.pwmt.zathura.desktop";
-    "video/*" = "vlc.desktop";
+    "video/mp4" = "vlc.desktop";
+    "video/mkv" = "vlc.desktop";
   };
 
   # services.blueman-applet.enable = true;
@@ -261,7 +263,7 @@ in
       ls = "eza --icons=always --no-quotes";
       tree = "eza --icons=always --tree --no-quotes";
       nix-shell = "nix-shell --command zsh";
-      update = "sudo nixos-rebuild switch";
+      zathura = ''zathura "$(find ~ -name "*.pdf" 2>/dev/null | fzf)"'';
     };
   };
 
