@@ -69,14 +69,17 @@ in
     ];
   };
 
-  xdg.mimeApps.defaultApplications = {
+  xdg.mimeApps = {
     enable = true;
-    "text/plain" = "emacsclient.desktop";
-    "application/pdf" = "org.pwmt.zathura.desktop";
-    "video/mp4" = "vlc.desktop";
-    "video/mkv" = "vlc.desktop";
+    defaultApplications = {
+      "text/plain" = [ "emacsclient.desktop" ];
+      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "video/mp4" = [ "vlc.desktop" ];
+      "video/x-matroska" = [ "vlc.desktop" ];
+      "image/png" = [ "org.pwmt.zathura.desktop" ];
+      "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; # Added jpeg just in case!
+    };
   };
-
   # services.blueman-applet.enable = true;
   #(import stylix).homeManagerModules.stylix
   # The home.packages option allows you to install Nix packages into your
