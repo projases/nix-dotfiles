@@ -318,7 +318,7 @@
     postman
     bruno
     openssl
-    
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Docker
     docker-compose
@@ -369,7 +369,11 @@
     cacert
     gradle
     
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # Scala
+    scala
+    sbt
+    coursier
+
 
   ];
   fonts.packages = with pkgs; [

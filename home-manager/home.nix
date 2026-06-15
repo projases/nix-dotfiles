@@ -198,7 +198,7 @@ in
     libGL
     gtk3
     zotero
-    weechat
+    # weechat
     (python3.withPackages (ps: [ ps.jupyter ps.matplotlib ]))
     wireguard-tools
     proton-vpn
