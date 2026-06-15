@@ -33,7 +33,6 @@ in
     ./programs
     ./services
     inputs.noctalia.homeModules.default
-    # nix-colors.homeManagerModules.default
   ];
   home.pointerCursor = {
     gtk.enable = true;
@@ -49,9 +48,9 @@ in
       icon-theme = "kora";
       cursor-theme = "catppuccin-mocha-dark-cursors";
     };
-    "org/pantheon/desktop/gala/appearance" = {
-      dark-theme = true;
-    };
+    # "org/pantheon/desktop/gala/appearance" = {
+    #   dark-theme = true;
+    # };
   };
   # services.emacs = {
   #   enable = true;
@@ -74,10 +73,14 @@ in
     defaultApplications = {
       "text/plain" = [ "emacsclient.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-      "video/mp4" = [ "vlc.desktop" ];
-      "video/x-matroska" = [ "vlc.desktop" ];
+      "video/mp4" = [ "mpv.desktop" ];
+      "video/x-matroska" = [ "mpv.desktop" ];
+      "video/webm" = [ "mpv.desktop" ];
+      "video/avi" = [ "mpv.desktop" ];
+      "video/mpeg" = [ "mpv.desktop" ];
+      "video/quicktime" = [ "mpv.desktop" ];
       "image/png" = [ "org.pwmt.zathura.desktop" ];
-      "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; # Added jpeg just in case!
+      "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; 
     };
   };
   # services.blueman-applet.enable = true;
@@ -127,6 +130,7 @@ in
     openssl
     pandoc
     zip
+    unzip
 
     #Appearance
     kora-icon-theme
@@ -150,11 +154,6 @@ in
     #Niri
     xwayland-satellite
     swayidle
-    
-    #daemons
-    mpd
-
-    #Hyprland
     pamixer
     fuzzel
     networkmanagerapplet
@@ -163,8 +162,12 @@ in
     glib
     gsettings-desktop-schemas
     hyprcursor
-
+ 
+    #daemons
+    mpd
+   
     #Apps
+    mpv
     kitty
     spotify
     vlc
@@ -199,8 +202,6 @@ in
     (python3.withPackages (ps: [ ps.jupyter ps.matplotlib ]))
     wireguard-tools
     proton-vpn
-    unzip
-    zip
     pgadmin4-desktopmode
     gemini-cli
     typst
