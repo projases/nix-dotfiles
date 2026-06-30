@@ -31,6 +31,53 @@
         defaultWallpaper = "~/Pictures/Wallpapers/highland_cattle.jpg"; 
       };
 
+      sessionMenu = {
+      enableCountdown = true;
+          countdownDuration = 10000;
+          position = "center";
+          showHeader = true;
+          showKeybinds = true;
+          largeButtonsStyle = false;
+          # largeButtonsLayout = "single-row";
+          powerOptions = [
+            {
+              action = "lock";
+              enabled = true;
+              keybind = "1";
+            }
+            {
+              action = "suspend";
+              enabled = true;
+              keybind = "2";
+            }
+            # {
+            #   action = "hibernate";
+            #   enabled = true;
+            #   keybind = "3";
+            # }
+            {
+              action = "reboot";
+              enabled = true;
+              keybind = "3";
+            }
+            {
+              action = "logout";
+              enabled = true;
+              keybind = "4";
+            }
+            {
+              action = "shutdown";
+              enabled = true;
+              keybind = "5";
+            }
+            # {
+            #   action = "rebootToUefi";
+            #   enabled = true;
+            #   keybind = "7";
+            # }
+          ];
+        };
+
       notifications = {
         enabled = true;
         density = "default";
@@ -40,8 +87,8 @@
         backgroundOpacity = 1;
         respectExpireTimeout = false;
         lowUrgencyDuration = 3;
-        normalUrgencyDuration = 8;
-        criticalUrgencyDuration = 15;
+        normalUrgencyDuration = 3;
+        criticalUrgencyDuration = 8;
         clearDismissed = true;
         enableKeyboardLayoutToast = true;
       };
@@ -64,11 +111,26 @@
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
-        terminalCommand = "ghossty -e";
+        terminalCommand = "ghostty -e";
         customLaunchPrefixEnabled = false;
         customLaunchPrefix = "";
       };
-      
+
+      # idle = {
+      #     enabled = false;
+      #     screenOffTimeout = 600;
+      #     lockTimeout = 660;
+      #     suspendTimeout = 1800;
+      #     fadeDuration = 5;
+      #     screenOffCommand = "";
+      #     lockCommand = "";
+      #     suspendCommand = "";
+      #     resumeScreenOffCommand = "";
+      #     resumeLockCommand = "";
+      #     resumeSuspendCommand = "";
+      #     customCommands = "[]";
+      #   };
+
       dock = {
         enabled = false;
       };
