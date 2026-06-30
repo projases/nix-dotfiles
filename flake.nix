@@ -10,7 +10,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -50,7 +50,7 @@
           overlays.lager-boost-fix
           overlays.wireshark-fix
           inputs.opencode-nix.overlays.default
-          inputs.nix-claude-code.overlays.default
+          # inputs.nix-claude-code.overlays.default
         ];
       }
 

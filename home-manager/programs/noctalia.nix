@@ -1,26 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
-    colors = {
-      mError = "#e1c1ee";          # warning/magenta - soft pink for errors
-      mHover = "#34373e";          # bg2 - hover background
-      mOnError = "#18191f";        # bg00 - darkest bg for text on error
-      mOnHover = "#d3d3d3";        # fg0 - brightest fg for hover states
-      mOnPrimary = "#18191f";      # bg00 - darkest bg for text on primary
-      mOnSecondary = "#18191f";    # bg00 - darkest bg for text on secondary
-      mOnSurface = "#ababab";      # fg2 - dimmed foreground for body text
-      mOnSurfaceVariant = "#6e7899"; # comment - for less important text
-      mOnTertiary = "#18191f";     # bg00 - darkest bg for text on tertiary
-      mOutline = "#41454b";        # bg3 - subtle borders
-      mPrimary = "#90a6db";        # key2 - brighter blue accent
-      mSecondary = "#5b94ab";      # str - teal strings
-      mShadow = "#18191f";         # bg00 - darkest for shadows
-      mSurface = "#282b33";        # bg1 - main background
-      mSurfaceVariant = "#1f2024"; # bg0 - slightly darker surface
-      mTertiary = "#b0a2e7";       # str - magenta accent
-    };
+    
     settings = {
       wallpaper = {
         enabled = true;
@@ -31,52 +14,70 @@
         defaultWallpaper = "~/Pictures/Wallpapers/highland_cattle.jpg"; 
       };
 
+      # colors = {
+      #   mError = "#e1c1ee";          # warning/magenta - soft pink for errors
+      #   mHover = "#34373e";          # bg2 - hover background
+      #   mOnError = "#18191f";        # bg00 - darkest bg for text on error
+      #   mOnHover = "#d3d3d3";        # fg0 - brightest fg for hover states
+      #   mOnPrimary = "#18191f";      # bg00 - darkest bg for text on primary
+      #   mOnSecondary = "#18191f";    # bg00 - darkest bg for text on secondary
+      #   mOnSurface = "#ababab";      # fg2 - dimmed foreground for body text
+      #   mOnSurfaceVariant = "#6e7899"; # comment - for less important text
+      #   mOnTertiary = "#18191f";     # bg00 - darkest bg for text on tertiary
+      #   mOutline = "#41454b";        # bg3 - subtle borders
+      #   mPrimary = "#90a6db";        # key2 - brighter blue accent
+      #   mSecondary = "#5b94ab";      # str - teal strings
+      #   mShadow = "#18191f";         # bg00 - darkest for shadows
+      #   mSurface = "#282b33";        # bg1 - main background
+      #   mSurfaceVariant = "#1f2024"; # bg0 - slightly darker surface
+      #   mTertiary = "#b0a2e7";       # str - magenta accent
+      # };
       sessionMenu = {
-      enableCountdown = true;
-          countdownDuration = 10000;
-          position = "center";
-          showHeader = true;
-          showKeybinds = true;
-          largeButtonsStyle = false;
-          # largeButtonsLayout = "single-row";
-          powerOptions = [
-            {
-              action = "lock";
-              enabled = true;
-              keybind = "1";
-            }
-            {
-              action = "suspend";
-              enabled = true;
-              keybind = "2";
-            }
-            # {
-            #   action = "hibernate";
-            #   enabled = true;
-            #   keybind = "3";
-            # }
-            {
-              action = "reboot";
-              enabled = true;
-              keybind = "3";
-            }
-            {
-              action = "logout";
-              enabled = true;
-              keybind = "4";
-            }
-            {
-              action = "shutdown";
-              enabled = true;
-              keybind = "5";
-            }
-            # {
-            #   action = "rebootToUefi";
-            #   enabled = true;
-            #   keybind = "7";
-            # }
-          ];
-        };
+        enableCountdown = true;
+        countdownDuration = 10000;
+        position = "center";
+        showHeader = true;
+        showKeybinds = true;
+        largeButtonsStyle = false;
+        # largeButtonsLayout = "single-row";
+        powerOptions = [
+          {
+            action = "lock";
+            enabled = true;
+            keybind = "1";
+          }
+          {
+            action = "suspend";
+            enabled = true;
+            keybind = "2";
+          }
+          # {
+          #   action = "hibernate";
+          #   enabled = true;
+          #   keybind = "3";
+          # }
+          {
+            action = "reboot";
+            enabled = true;
+            keybind = "3";
+          }
+          {
+            action = "logout";
+            enabled = true;
+            keybind = "4";
+          }
+          {
+            action = "shutdown";
+            enabled = true;
+            keybind = "5";
+          }
+          # {
+          #   action = "rebootToUefi";
+          #   enabled = true;
+          #   keybind = "7";
+          # }
+        ];
+      };
 
       notifications = {
         enabled = true;
@@ -115,7 +116,17 @@
         customLaunchPrefixEnabled = false;
         customLaunchPrefix = "";
       };
-
+      colorSchemes = {
+        useWallpaperColors = false;
+        predefinedScheme = "Wilmersdorf";
+        darkMode = true;
+        schedulingMode = "off";
+        manualSunrise = "06:30";
+        manualSunset = "18:30";
+        generationMethod = "tonal-spot";
+        monitorForColors = "";
+        syncGsettings = true;
+      };
       # idle = {
       #     enabled = false;
       #     screenOffTimeout = 600;
@@ -182,9 +193,12 @@
         avatarImage = "~/Pictures/icons/lambda_m.png";
         radiusRatio = 1;
       };
+
       location = {
         monthBeforeDay = true;
         name = "Girona, Spain";
+        # latitude = 41.979401;
+        # longitude = 2.821426;
       };
     };
   };
