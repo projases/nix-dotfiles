@@ -373,6 +373,7 @@
     scala
     sbt
     coursier
+    metals
 
 
   ];

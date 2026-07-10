@@ -190,6 +190,7 @@ in
     # krita
     jetbrains.idea-oss
     jetbrains.idea
+    (jetbrains.plugins.addPlugins jetbrains.idea-community [ "scala" ])
     geany
     kdbg
     syncthing

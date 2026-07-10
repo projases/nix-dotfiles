@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.noctalia = {
+  programs.noctalia-shell = {
     enable = true;
     
     settings = {
@@ -14,24 +14,24 @@
         defaultWallpaper = "~/Pictures/Wallpapers/highland_cattle.jpg"; 
       };
 
-      # colors = {
-      #   mError = "#e1c1ee";          # warning/magenta - soft pink for errors
-      #   mHover = "#34373e";          # bg2 - hover background
-      #   mOnError = "#18191f";        # bg00 - darkest bg for text on error
-      #   mOnHover = "#d3d3d3";        # fg0 - brightest fg for hover states
-      #   mOnPrimary = "#18191f";      # bg00 - darkest bg for text on primary
-      #   mOnSecondary = "#18191f";    # bg00 - darkest bg for text on secondary
-      #   mOnSurface = "#ababab";      # fg2 - dimmed foreground for body text
-      #   mOnSurfaceVariant = "#6e7899"; # comment - for less important text
-      #   mOnTertiary = "#18191f";     # bg00 - darkest bg for text on tertiary
-      #   mOutline = "#41454b";        # bg3 - subtle borders
-      #   mPrimary = "#90a6db";        # key2 - brighter blue accent
-      #   mSecondary = "#5b94ab";      # str - teal strings
-      #   mShadow = "#18191f";         # bg00 - darkest for shadows
-      #   mSurface = "#282b33";        # bg1 - main background
-      #   mSurfaceVariant = "#1f2024"; # bg0 - slightly darker surface
-      #   mTertiary = "#b0a2e7";       # str - magenta accent
-      # };
+      colors = {
+        mError = "#e1c1ee";          # warning/magenta - soft pink for errors
+        mHover = "#34373e";          # bg2 - hover background
+        mOnError = "#18191f";        # bg00 - darkest bg for text on error
+        mOnHover = "#d3d3d3";        # fg0 - brightest fg for hover states
+        mOnPrimary = "#18191f";      # bg00 - darkest bg for text on primary
+        mOnSecondary = "#18191f";    # bg00 - darkest bg for text on secondary
+        mOnSurface = "#ababab";      # fg2 - dimmed foreground for body text
+        mOnSurfaceVariant = "#6e7899"; # comment - for less important text
+        mOnTertiary = "#18191f";     # bg00 - darkest bg for text on tertiary
+        mOutline = "#41454b";        # bg3 - subtle borders
+        mPrimary = "#90a6db";        # key2 - brighter blue accent
+        mSecondary = "#5b94ab";      # str - teal strings
+        mShadow = "#18191f";         # bg00 - darkest for shadows
+        mSurface = "#282b33";        # bg1 - main background
+        mSurfaceVariant = "#1f2024"; # bg0 - slightly darker surface
+        mTertiary = "#b0a2e7";       # str - magenta accent
+      };
       sessionMenu = {
         enableCountdown = true;
         countdownDuration = 10000;
