@@ -189,8 +189,8 @@ in
     brave
     # krita
     jetbrains.idea-oss
-    jetbrains.idea
-    (jetbrains.plugins.addPlugins jetbrains.idea-community [ "scala" ])
+    # jetbrains.idea
+    (jetbrains.plugins.addPlugins jetbrains.idea[ scala ])
     geany
     kdbg
     syncthing

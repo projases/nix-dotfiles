@@ -359,6 +359,7 @@
     kitty
     dnsmasq
     virtiofsd
+    mpv
 
     # Java
     maven
