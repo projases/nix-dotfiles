@@ -81,6 +81,11 @@ in
       "video/quicktime" = [ "mpv.desktop" ];
       "image/png" = [ "org.pwmt.zathura.desktop" ];
       "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; 
+      # browser zen
+      "text/html" = [ "zen-browser.desktop" ];
+      "application/xhtml+xml" = [ "zen-browser.desktop" ];
+      "application/xml" = [ "zen-browser.desktop" ];
+
     };
   };
   # services.blueman-applet.enable = true;
@@ -131,6 +136,7 @@ in
     pandoc
     zip
     unzip
+    exercism
 
     #Appearance
     kora-icon-theme

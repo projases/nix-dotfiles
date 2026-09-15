@@ -13,6 +13,7 @@ $golang\
 $php\
 $haskell\
 $java\
+$scala\
 $c\
 $nix_shell\
 [](fg:#5b94ab bg:#34373e)\
@@ -73,6 +74,12 @@ format = '[[ $symbol ($version) ](fg:#d3d3d3 bg:#5b94ab)]($style)'
 symbol = ""
 style = "bg:#5b94ab"
 format = '[[ $symbol ($version) ](fg:#d3d3d3 bg:#5b94ab)]($style)'
+
+[scala] 
+symbol = ""
+style = "bg:#5b94ab"
+format = '[[ $symbol ($version) ](fg:#d3d3d 3 bg:#5b94ab)]($style)'
+
 
 [c]
 symbol = ""

@@ -74,6 +74,11 @@
       style = "bg:#5b94ab"
       format = '[[ $symbol ($version) ](fg:#d3d3d3 bg:#5b94ab)]($style)'
 
+      [scala] 
+      symbol = ""
+      style = "bg:#5b94ab"
+      format = '[[ $symbol ($version) ](fg:#d3d3d 3 bg:#5b94ab)]($style)'
+
       [java]
       symbol = ""
       style = "bg:#5b94ab"
