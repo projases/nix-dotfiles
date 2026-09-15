@@ -19,6 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    helium = {
+      url = "github:oxcl/nix-flake-helium-browser";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     sf-mono-liga-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
@@ -32,7 +38,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, mistral-vibe, sf-mono-liga-src, zen-browser, opencode-nix, nix-claude-code, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mistral-vibe, sf-mono-liga-src, zen-browser, opencode-nix, nix-claude-code, helium, ... }@inputs:
 
   let 
     overlays = import ./overlays { inherit sf-mono-liga-src; };
@@ -62,7 +68,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           users.pablo = import ./home-manager/home.nix;
-          extraSpecialArgs = { inherit inputs zen-browser; };
+          extraSpecialArgs = { inherit inputs zen-browser helium; };
         };
       }
     ];
