@@ -84,7 +84,6 @@ in
       "video/quicktime" = [ "mpv.desktop" ];
       "image/png" = [ "org.pwmt.zathura.desktop" ];
       "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; 
-
     };
   };
   # services.blueman-applet.enable = true;
@@ -196,7 +195,6 @@ in
     jetbrains.idea-oss
     # jetbrains.idea
     (jetbrains.plugins.addPlugins jetbrains.idea[ scala ])
-    geany
     kdbg
     syncthing
     pantheon-tweaks
