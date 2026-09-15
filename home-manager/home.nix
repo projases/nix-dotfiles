@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   zen-browser,
+  helium,
   ...
 }:
 
@@ -12,6 +13,7 @@ let
     sha256 = "b4f974ff9530c0d7781bbb89998a501be7f00fed4fb6ce8f210395ff4b435b96";
   };
   zen-browser = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default;
+  helium = inputs.helium.packages."${pkgs.stdenv.hostPlatform.system}".default;
 in
 
 {
@@ -82,9 +84,6 @@ in
       "video/quicktime" = [ "mpv.desktop" ];
       "image/png" = [ "org.pwmt.zathura.desktop" ];
       "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; 
-      "text/html" = [ "zen-browser.desktop" ];
-      "application/xhtml+xml" = [ "zen-browser.desktop" ];
-      "application/xml" = [ "zen-browser.desktop" ];
 
     };
   };
@@ -184,6 +183,7 @@ in
     helix
     # julia
     zen-browser
+    helium
     transmission_4
     obs-studio
     xournalpp
