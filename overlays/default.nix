@@ -36,25 +36,4 @@
     });
   };
 
-  tree-sitter-fix = final: prev: {
-    # 1. Top-level tree-sitter grammars (just in case)
-    tree-sitter-grammars = prev.tree-sitter-grammars // {
-      tree-sitter-cuda = prev.tree-sitter-grammars.tree-sitter-cuda.overrideAttrs (oldAttrs: {
-        src = oldAttrs.src.overrideAttrs (_: {
-          outputHash = "sha256-s2qrZx5fEu/I6xE2paX/Nlmgvo6T27qqvy1cI8iznAA=";
-        });
-      });
-    };
-
-    # 2. Emacs-specific treesit grammars set (THIS is what Emacs uses)
-    emacsPackagesFor = emacs: (prev.emacsPackagesFor emacs).overrideScope (efinal: eprev: {
-      treesit-grammars = eprev.treesit-grammars // {
-        tree-sitter-cuda = eprev.treesit-grammars.tree-sitter-cuda.overrideAttrs (oldAttrs: {
-          src = oldAttrs.src.overrideAttrs (_: {
-            outputHash = "sha256-s2qrZx5fEu/I6xE2paX/Nlmgvo6T27qqvy1cI8iznAA=";
-          });
-        });
-      };
-    });
-  };
 }

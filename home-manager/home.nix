@@ -66,9 +66,74 @@ in
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
-  
+
     extraPackages = epkgs: [
-      epkgs.treesit-grammars.with-all-grammars
+      (epkgs.treesit-grammars.with-grammars (p: [
+        # Core Systems & Compiled
+        p.tree-sitter-c
+        p.tree-sitter-cpp
+        p.tree-sitter-rust
+        p.tree-sitter-go
+        p.tree-sitter-java
+        p.tree-sitter-c-sharp
+        p.tree-sitter-zig
+
+        # Scripting & Dynamic Languages
+        p.tree-sitter-python
+        p.tree-sitter-ruby
+        p.tree-sitter-php
+        p.tree-sitter-lua
+        p.tree-sitter-perl
+        p.tree-sitter-julia
+        p.tree-sitter-r
+
+        # Web Development
+        p.tree-sitter-javascript
+        p.tree-sitter-typescript
+        p.tree-sitter-tsx
+        p.tree-sitter-html
+        p.tree-sitter-css
+        p.tree-sitter-scss
+        p.tree-sitter-vue
+        p.tree-sitter-svelte
+
+        # Shell & Config / Data Languages
+        p.tree-sitter-bash
+        p.tree-sitter-nix
+        p.tree-sitter-json
+        p.tree-sitter-yaml
+        p.tree-sitter-toml
+        p.tree-sitter-dockerfile
+        p.tree-sitter-make
+        p.tree-sitter-cmake
+        p.tree-sitter-kdl
+
+        # Functional Languages
+        p.tree-sitter-elixir
+        p.tree-sitter-scala
+        p.tree-sitter-heex
+        p.tree-sitter-erlang
+        p.tree-sitter-haskell
+        p.tree-sitter-ocaml
+        p.tree-sitter-ocaml-interface
+        p.tree-sitter-clojure
+        p.tree-sitter-commonlisp
+
+        # Markup, Prose & Documentation
+        p.tree-sitter-markdown
+        p.tree-sitter-markdown-inline
+        p.tree-sitter-org
+        p.tree-sitter-rst
+        p.tree-sitter-latex
+        p.tree-sitter-bibtex
+        p.tree-sitter-typst
+        p.tree-sitter-norg
+
+        # Query / Miscellaneous
+        p.tree-sitter-sql
+        p.tree-sitter-graphql
+        p.tree-sitter-proto
+      ]))
     ];
   };
 
@@ -191,9 +256,9 @@ in
     karere 
     texlivePackages.latexmk
     texliveFull
-    openboard
+    # openboard
     # krita
-    jetbrains.idea
+    # jetbrains.idea
     (jetbrains.plugins.addPlugins jetbrains.idea[ scala ])
     kdbg
     syncthing
