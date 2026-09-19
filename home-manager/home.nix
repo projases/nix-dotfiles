@@ -38,6 +38,7 @@ in
     inputs.noctalia.homeModules.default
   ];
   home.pointerCursor = {
+    enable = true;
     gtk.enable = true;
     name = "catppuccin-mocha-dark-cursors";
     package = pkgs.catppuccin-cursors.mochaDark;
@@ -192,8 +193,7 @@ in
     texliveFull
     openboard
     # krita
-    jetbrains.idea-oss
-    # jetbrains.idea
+    jetbrains.idea
     (jetbrains.plugins.addPlugins jetbrains.idea[ scala ])
     kdbg
     syncthing
@@ -207,7 +207,7 @@ in
     wireguard-tools
     proton-vpn
     pgadmin4-desktopmode
-    gemini-cli
+    antigravity-cli
     typst
     zathura
   ];
