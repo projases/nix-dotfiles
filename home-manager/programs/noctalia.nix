@@ -120,11 +120,23 @@
       # v4 general.* + ui.*
       shell = {
         avatar_path = "~/Pictures/icons/lambda_m.png"; # was general.avatarImage
-        corner_radius_scale = 1.0;                     # was general.radiusRatio
+        # corner_radius_scale = 1.0;                     # was general.radiusRatio
         font_family = "Inter";                         # was ui.fontDefault
         clipboard_enabled = true;                      # was appLauncher.enableClipboardHistory
+
         # v4 ui.fontFixed / tooltipsEnabled and customLaunchPrefix dropped;
         # terminalCommand auto-detected from $TERMINAL/Ghostty in v5
+      };
+
+      shell.screen_corners = {
+        enabled = true;
+      };
+
+      shell.screenshot = {
+        save_to_file = true;               
+        copy_to_clipboard = true;
+        directory = "~/Pictures/Screenshots";
+        annotate = true;
       };
 
       # v4 sessionMenu.* (also floats: shell.panel.session_placement)
@@ -139,6 +151,11 @@
           { action = "logout";   shortcut = "4"; }
           { action = "shutdown"; shortcut = "5"; }
         ];
+      };
+
+      shell.panel = {
+        session_placement = "floating";
+        session_position = "center";
       };
 
       # v4 notifications.* (density, monitors, per-urgency durations,
@@ -185,19 +202,36 @@
         capsule = false;               # was showCapsule
         thickness = 30;
         padding = 8;
+        margin_ends = 0;
+        margin_edge = 0;
         widget_spacing = 4;
         font_scale = 0.95;
+        concave_edge_corners = true;
         start  = [ "control-center" ];   # was ControlCenter
         center = [ "workspaces" ];       # was Workspace (labelMode lost)
         end    = [ "clock" "network" "bluetooth" "tray" ]; # was Clock WiFi Bluetooth Tray
       };
 
       # per-widget options live under [widget.<name>]
+      widget.control_center = {
+        custom_image = "~/Pictures/icons/NixOS.png"; # was customAvatarImage
+      };
       widget.clock = {
         format = "{:%H:%M %a}";     # was formatHorizontal "HH:mm ddd"
         vertical_format = "{:%H:%M}"; # was formatVertical
         font_family = "monospace";  # was useMonospacedFont
         color = "primary";          # was usePrimaryColor
+      };
+
+      widget.workspaces = {
+        show_labels = false;         # was showWorkspaceLabels
+        pill_scale = 0.8;              # was pillScale
+      };
+
+      widget.network = {
+        # show_icon = true;            # was showNetworkIcon
+        # show_name = false;           # was showNetworkName
+        show_label = false;          # was showNetworkLabel
       };
 
       # v4 location.* (monthBeforeDay is locale-driven in v5; name -> address)
