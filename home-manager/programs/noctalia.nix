@@ -24,6 +24,80 @@
         mShadow = "#18191f";           # bg00
         mHover = "#34373e";            # bg2 - hover background
         mOnHover = "#d3d3d3";          # fg0
+        terminal = {
+          background = "#282b33";
+          foreground = "#ababab";
+          cursor = "#d3d3d3";
+          cursorText = "#18191f";
+          selectionBg = "#41454b";
+          selectionFg = "#ababab";
+          normal = {
+            black = "#18191f";
+            red = "#e1c1ee";
+            green = "#90a6db";
+            yellow = "#b0a2e7";
+            blue = "#5b94ab";
+            magenta = "#b0a2e7";
+            cyan = "#5b94ab";
+            white = "#ababab";
+          };
+          bright = {
+            black = "#41454b";
+            red = "#e1c1ee";
+            green = "#90a6db";
+            yellow = "#b0a2e7";
+            blue = "#5b94ab";
+            magenta = "#b0a2e7";
+            cyan = "#5b94ab";
+            white = "#d3d3d3";
+          };
+        };
+      };
+      light = {
+        mPrimary = "#90a6db";
+        mOnPrimary = "#18191f";
+        mSecondary = "#5b94ab";
+        mOnSecondary = "#18191f";
+        mTertiary = "#b0a2e7";
+        mOnTertiary = "#18191f";
+        mError = "#e1c1ee";
+        mOnError = "#18191f";
+        mSurface = "#282b33";
+        mOnSurface = "#ababab";
+        mSurfaceVariant = "#1f2024";
+        mOnSurfaceVariant = "#6e7899";
+        mOutline = "#41454b";
+        mShadow = "#18191f";
+        mHover = "#34373e";
+        mOnHover = "#d3d3d3";
+        terminal = {
+          background = "#282b33";
+          foreground = "#ababab";
+          cursor = "#d3d3d3";
+          cursorText = "#18191f";
+          selectionBg = "#41454b";
+          selectionFg = "#ababab";
+          normal = {
+            black = "#18191f";
+            red = "#e1c1ee";
+            green = "#90a6db";
+            yellow = "#b0a2e7";
+            blue = "#5b94ab";
+            magenta = "#b0a2e7";
+            cyan = "#5b94ab";
+            white = "#ababab";
+          };
+          bright = {
+            black = "#41454b";
+            red = "#e1c1ee";
+            green = "#90a6db";
+            yellow = "#b0a2e7";
+            blue = "#5b94ab";
+            magenta = "#b0a2e7";
+            cyan = "#5b94ab";
+            white = "#d3d3d3";
+          };
+        };
       };
     };
 
