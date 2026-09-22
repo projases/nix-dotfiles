@@ -7,7 +7,7 @@
   services.swayidle = 
   let
     system = pkgs.stdenv.hostPlatform.system;
-    lock = "${inputs.noctalia.packages.${system}.default}/bin/noctalia-shell ipc call lockScreen lock";
+    lock = "${inputs.noctalia.packages.${system}.default}/bin/noctalia msg session lock";
     display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
   in
     {
