@@ -150,6 +150,7 @@ in
       "video/quicktime" = [ "mpv.desktop" ];
       "image/png" = [ "org.pwmt.zathura.desktop" ];
       "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; 
+      "inode/directory" = [ "com.system76.CosmicFiles.desktop" ];
     };
   };
   # services.blueman-applet.enable = true;
@@ -226,7 +227,7 @@ in
     swayidle
     pamixer
     fuzzel
-    networkmanagerapplet
+    # networkmanagerapplet
     brightnessctl
     playerctl
     glib

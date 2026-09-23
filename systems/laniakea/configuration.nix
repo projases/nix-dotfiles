@@ -107,6 +107,24 @@
     variant = "";
   };
 
+  # XDG portal
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = [
+      pkgs.xdg-desktop-portal-cosmic
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+    ];
+
+    config.niri = {
+      default = lib.mkForce "cosmic";
+      # "org.freedesktop.impl.portal.FileChooser" = [ "cosmic" ];
+      # "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+      # "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+    };
+  };
+
   # Apache HTTP server
   # Enable postgreSQL
   services.postgresql = {
