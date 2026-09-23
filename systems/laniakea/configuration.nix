@@ -337,6 +337,7 @@
     bruno
     openssl
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    jq
 
     # Docker
     docker-compose
@@ -361,6 +362,9 @@
     typescript
     typescript-language-server
     copilot-language-server
+    vscode-langservers-extracted
+    eslint
+    prettier
 
     # Haskell 
     ghc
@@ -387,6 +391,7 @@
     postgresql_jdbc
     cacert
     gradle
+    openjfx
     
     # Scala
     scala
@@ -394,7 +399,9 @@
     coursier
     metals
 
-
+    # Kotlin
+    kotlin
+    kotlin-language-server
   ];
   fonts.packages = with pkgs; [
       fira

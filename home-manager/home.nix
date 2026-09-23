@@ -261,6 +261,8 @@ in
     # krita
     # jetbrains.idea
     (jetbrains.plugins.addPlugins jetbrains.idea[ scala ])
+    android-studio
+    android-tools
     kdbg
     syncthing
     pantheon-tweaks
