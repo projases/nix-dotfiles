@@ -2,6 +2,6 @@
   imports = [
      # ./hypridle.nix
      # ./hyprpaper.nix
-     ./swayidle.nix
+     # ./swayidle.nix
   ];
 }

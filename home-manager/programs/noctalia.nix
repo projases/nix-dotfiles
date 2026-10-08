@@ -108,6 +108,17 @@
         custom_palette = "Wilmersdorf";
       };
 
+      idle = {
+        behavior_order = [ "custom" "lock" "screen-off" "suspend"];
+        pre_action_fade_seconds = 5.0;
+        behavior = {
+          "custom" = { timeout = 300; action = "command" ; command = "notify-send 'Idle timeout reached'"; enabled = true; };
+          lock = { timeout = 660; action = "lock"; enabled = true; };
+          "screen-off" = { timeout = 600; action = "screen_off"; enabled = true; };
+          suspend = { timeout = 900; action = "suspend"; enabled = true; };
+        };
+      };
+
       # v4 wallpaper.* (overviewEnabled and setWallpaperOnAllMonitors have no
       # v5 equivalent - wallpaper covers all outputs in v5)
       wallpaper = {
@@ -146,7 +157,6 @@
         actions = [
           { action = "lock";     shortcut = "1"; }
           { action = "suspend";  shortcut = "2"; }
-          # v4 didn't enable hibernate / rebootToUefi
           { action = "reboot";   shortcut = "3"; }
           { action = "logout";   shortcut = "4"; }
           { action = "shutdown"; shortcut = "5"; }

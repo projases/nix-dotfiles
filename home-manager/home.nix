@@ -195,6 +195,7 @@ in
     inputs.nix-claude-code.packages."${pkgs.stdenv.hostPlatform.system}".default
     inputs.mistral-vibe.packages."${pkgs.stdenv.hostPlatform.system}".default
     nmap
+    tealdeer
     # gnupg
     pinentry-all
     openssl
@@ -224,7 +225,7 @@ in
 
     #Niri
     xwayland-satellite
-    swayidle
+    # swayidle
     pamixer
     fuzzel
     # networkmanagerapplet
@@ -369,6 +370,18 @@ in
   };
   programs.bat = {
     enable = true;
+    themes = {
+      wilmersdorf = {
+        src = pkgs.fetchFromGitHub {
+        owner = "projases";
+        repo = "wilmersdorf-bat";
+        rev = "main";
+        sha256 = "sha256-+bWiOmpa/cf6+O0C2pvdKd++jFh3R9Z/drMTx3sV+R4=";
+      }; 
+        file = "wilmersdorf.tmTheme";
+      };
+    };
+    config.theme = "wilmersdorf";
     extraPackages = with pkgs.bat-extras; [
       batdiff
       batman

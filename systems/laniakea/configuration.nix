@@ -128,7 +128,7 @@
   # Apache HTTP server
   # Enable postgreSQL
   services.postgresql = {
-    enable = true;
+    enable = false;
     package = pkgs.postgresql_18;
     # initdbArgs = [ "--locale=en_GB.UTF-8" "--encoding=UTF8" ];
     # authentication = pkgs.lib.mkOverride 10 ''
