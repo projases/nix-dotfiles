@@ -118,10 +118,10 @@
     ];
 
     config.niri = {
-      default = lib.mkForce "cosmic";
+      default = lib.mkForce ["cosmic" "gtk"]; 
       # "org.freedesktop.impl.portal.FileChooser" = [ "cosmic" ];
-      # "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-      # "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+      "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+      "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
     };
   };
 
@@ -341,6 +341,8 @@
 
     # Docker
     docker-compose
+    #Shell
+    shellcheck
 
     # C 
     gcc
@@ -355,6 +357,7 @@
 
     # Nix
     alejandra
+    nixfmt-rfc-style
     nil
 
     # JS 
@@ -364,7 +367,11 @@
     copilot-language-server
     vscode-langservers-extracted
     eslint
+
     prettier
+    html-tidy
+    stylelint
+    js-beautify
 
     # Haskell 
     ghc
@@ -373,6 +380,7 @@
     hlint
     ghcid
     haskellPackages.stack
+    haskellPackages.hoogle
 
     # Apps
     neovim
@@ -402,6 +410,7 @@
     # Kotlin
     kotlin
     kotlin-language-server
+    ktlint
   ];
   fonts.packages = with pkgs; [
       fira
@@ -468,6 +477,11 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/70865c09-13f1-487a-be74-414231f20b5c";
+    fsType = "ext4";
+  };
 
   system.stateVersion = "24.05"; 
 
