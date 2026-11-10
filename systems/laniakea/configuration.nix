@@ -1,15 +1,19 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
 
   networking.hostName = "laniakea"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -26,7 +30,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocales = [ "en_GB.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ]; 
+  i18n.extraLocales = ["en_GB.UTF-8/UTF-8" "en_US.UTF-8/UTF-8"];
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "es_ES.UTF-8";
@@ -42,36 +46,42 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
   hardware.graphics.enable = true;
   hardware.amdgpu.initrd.enable = true;
 
   # Enable AMD GPU firmware
-  hardware.firmware = [ pkgs.linux-firmware ];
+  hardware.firmware = [pkgs.linux-firmware];
 
   #Enable virt manager
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
   programs.virt-manager.enable = true;
-  
+
   # Enable virtual box
   virtualisation.virtualbox.host = {
-  enable = true;
-  package = pkgs.virtualbox;
-  enableExtensionPack = true;
-  enableKvm = false;
-  addNetworkInterface = true;
-
+    enable = true;
+    package = pkgs.virtualbox;
+    enableExtensionPack = true;
+    enableKvm = false;
+    addNetworkInterface = true;
   };
   virtualisation.virtualbox.guest = {
-  enable = true;
-  dragAndDrop = true;
-  clipboard = true;
-  seamless = true;
+    enable = true;
+    dragAndDrop = true;
+    clipboard = true;
+    seamless = true;
   };
-   
+
   #Enable docker
   virtualisation.docker.enable = true;
-  
+
   services.gnome.gnome-online-accounts.enable = true;
   services.accounts-daemon.enable = true;
   # Enable the Cosmic Desktop Environment.
@@ -90,16 +100,15 @@
         size = 20;
       };
       extraConfig = ''
-      [Greeter]
-      background = /etc/lightdm/cows.jpg
-      show-hostname = true
+        [Greeter]
+        background = /etc/lightdm/cows.jpg
+        show-hostname = true
       '';
-
     };
   };
 
   #Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -118,10 +127,10 @@
     ];
 
     config.niri = {
-      default = lib.mkForce ["cosmic" "gtk"]; 
+      default = lib.mkForce ["cosmic" "gtk"];
       # "org.freedesktop.impl.portal.FileChooser" = [ "cosmic" ];
-      "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-      "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+      "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
+      "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
     };
   };
 
@@ -138,15 +147,14 @@
     # '';
   };
 
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
- #enable bluetooth
+  #enable bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     input = {
-      General =  {
+      General = {
         UserspaceHID = true;
       };
     };
@@ -171,18 +179,18 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-   services.libinput.enable = true;
+  services.libinput.enable = true;
 
-   security.pki.certificateFiles = [
-     ./certs/uoc-chain.pem
-   ];
+  security.pki.certificateFiles = [
+    ./certs/uoc-chain.pem
+  ];
 
   # Enable nginx with rtmp module
   services.nginx = {
     enable = false;
-    package = (pkgs.nginx.override {
-      modules = [ pkgs.nginxModules.rtmp ];
-    });
+    package = pkgs.nginx.override {
+      modules = [pkgs.nginxModules.rtmp];
+    };
     appendConfig = ''
       rtmp {
         server {
@@ -213,7 +221,12 @@
 
     virtualHosts = {
       "default" = {
-        listen = [ { addr = "0.0.0.0"; port = 80; } ];
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
         locations."/" = {
           root = "/var/www/html";
           index = "index.html";
@@ -221,7 +234,12 @@
       };
 
       "rtmp-stats" = {
-        listen = [ { addr = "0.0.0.0"; port = 8080; } ];
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 8080;
+          }
+        ];
         locations."/stat" = {
           extraConfig = ''
             rtmp_stat all;
@@ -240,13 +258,18 @@
 
       # HLS/DASH streaming virtual host
       "streaming-video" = {
-        listen = [ { addr = "0.0.0.0"; port = 8088; } ];
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 8088;
+          }
+        ];
 
         locations."/hls" = {
           root = "/var/www/html/stream";
           extraConfig = ''
             add_header Access-Control-Allow-Origin *;
-            '';
+          '';
         };
 
         locations."/dash" = {
@@ -256,30 +279,29 @@
                 types {
                     application/dash+xml mpd;
                 }
-            '';
+          '';
         };
       };
     };
   };
 
   systemd.services.nginx.serviceConfig = {
-    ReadWritePaths = [ "/var/www/html" ];
+    ReadWritePaths = ["/var/www/html"];
   };
 
   # Group needed for configuring udev rules for ZSA keyboards
-  users.groups.plugdev = { };
+  users.groups.plugdev = {};
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pablo = {
     isNormalUser = true;
     description = "Pablo Rojas Espejel";
-    extraGroups = [ "libvirtd" "docker" "plugdev" "networkmanager" "wheel" "video" "input" "render" "vboxusers" "wireshark" ];
+    extraGroups = ["libvirtd" "kvm" "docker" "plugdev" "networkmanager" "wheel" "video" "input" "render" "vboxusers" "wireshark"];
     shell = pkgs.fish;
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
-  
   programs.direnv.enable = true;
   programs.fish.enable = true;
   # programs.hyprland.enable = true;
@@ -314,7 +336,7 @@
   #   package = pkgs.hypridle;
   # };
   #Shells
-  environment.shells = with pkgs; [fish zsh bash nushell ];
+  environment.shells = with pkgs; [fish zsh bash nushell];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -339,12 +361,20 @@
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     jq
 
+    # Virtualization
+    virt-manager
+    virt-viewer
+    bridge-utils
+    ebtables
+    dnsmasq
+    nftables
+
     # Docker
     docker-compose
     #Shell
     shellcheck
 
-    # C 
+    # C
     gcc
     gnumake
     clang
@@ -357,10 +387,10 @@
 
     # Nix
     alejandra
-    nixfmt-rfc-style
+    nixfmt
     nil
 
-    # JS 
+    # JS
     nodejs
     typescript
     typescript-language-server
@@ -373,7 +403,7 @@
     stylelint
     js-beautify
 
-    # Haskell 
+    # Haskell
     ghc
     cabal-install
     haskellPackages.haskell-language-server
@@ -400,7 +430,7 @@
     cacert
     gradle
     openjfx
-    
+
     # Scala
     scala
     sbt
@@ -413,30 +443,30 @@
     ktlint
   ];
   fonts.packages = with pkgs; [
-      fira
-      fira-code-symbols
-      dina-font
-      roboto
-      corefonts
-      nerd-fonts.noto
-      nerd-fonts.intone-mono
-      nerd-fonts.victor-mono
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.hasklug
-      nerd-fonts.fira-code
-      nerd-fonts.lilex
-      vista-fonts
-      font-awesome
-      aileron
-      helvetica-neue-lt-std
-      lato
-      tenderness
-      vegur
-      azeret-mono
-      texlivePackages.inter
-      julia-mono
-      sf-mono-liga-bin
-    ];
+    fira
+    fira-code-symbols
+    dina-font
+    roboto
+    corefonts
+    nerd-fonts.noto
+    nerd-fonts.intone-mono
+    nerd-fonts.victor-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.hasklug
+    nerd-fonts.fira-code
+    nerd-fonts.lilex
+    vista-fonts
+    font-awesome
+    aileron
+    helvetica-neue-lt-std
+    lato
+    tenderness
+    vegur
+    azeret-mono
+    texlivePackages.inter
+    julia-mono
+    sf-mono-liga-bin
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -483,6 +513,5 @@
     fsType = "ext4";
   };
 
-  system.stateVersion = "24.05"; 
-
+  system.stateVersion = "24.05";
 }

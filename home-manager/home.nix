@@ -4,19 +4,21 @@
   inputs,
   zen-browser,
   helium,
+  neomacs,
   ...
-}:
-
-let
+}: let
   doomIcon = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/eccentric-j/doom-icon/master/cute-doom/doom.png";
     sha256 = "b4f974ff9530c0d7781bbb89998a501be7f00fed4fb6ce8f210395ff4b435b96";
   };
   zen-browser = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default;
   helium = inputs.helium.packages."${pkgs.stdenv.hostPlatform.system}".default;
-in
-
-{
+  neomacs = inputs.neomacs.packages."${pkgs.stdenv.hostPlatform.system}".default;
+  neomacs-alias = pkgs.runCommand "neomacs" {} ''
+    mkdir -p $out/bin
+    ln -s ${neomacs}/bin/emacs $out/bin/neomacs
+  '';
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "pablo";
@@ -43,6 +45,11 @@ in
     name = "catppuccin-mocha-dark-cursors";
     package = pkgs.catppuccin-cursors.mochaDark;
     size = 20;
+  };
+
+  home.keyboard = {
+    layout = "us";
+    options = ["altgr-intl"];
   };
 
   dconf.settings = {
@@ -86,6 +93,7 @@ in
         p.tree-sitter-perl
         p.tree-sitter-julia
         p.tree-sitter-r
+        p.tree-sitter-kotlin
 
         # Web Development
         p.tree-sitter-javascript
@@ -140,25 +148,30 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/plain" = [ "emacsclient.desktop" ];
-      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-      "video/mp4" = [ "mpv.desktop" ];
-      "video/x-matroska" = [ "mpv.desktop" ];
-      "video/webm" = [ "mpv.desktop" ];
-      "video/avi" = [ "mpv.desktop" ];
-      "video/mpeg" = [ "mpv.desktop" ];
-      "video/quicktime" = [ "mpv.desktop" ];
-      "image/png" = [ "org.pwmt.zathura.desktop" ];
-      "image/jpeg" = [ "org.pwmt.zathura.desktop" ]; 
-      "inode/directory" = [ "com.system76.CosmicFiles.desktop" ];
+      "text/plain" = ["emacsclient.desktop"];
+      "application/pdf" = ["org.pwmt.zathura.desktop"];
+      "video/mp4" = ["mpv.desktop"];
+      "video/x-matroska" = ["mpv.desktop"];
+      "video/webm" = ["mpv.desktop"];
+      "video/avi" = ["mpv.desktop"];
+      "video/mpeg" = ["mpv.desktop"];
+      "video/quicktime" = ["mpv.desktop"];
+      "image/png" = ["org.pwmt.zathura.desktop"];
+      "image/jpeg" = ["org.pwmt.zathura.desktop"];
+      "inode/directory" = ["com.system76.CosmicFiles.desktop"];
     };
+  };
+  xdg.desktopEntries.neomacs = {
+    name = "Neomacs";
+    comment = "emacs with a rust core";
+    exec = "neomacs %F";
+    terminal = false;
   };
   # services.blueman-applet.enable = true;
   #(import stylix).homeManagerModules.stylix
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-
     #terminal
     zsh
     zsh-history-substring-search
@@ -211,6 +224,8 @@ in
     gnome-tweaks
     catppuccin-cursors.mochaDark
 
+    #Neomacs
+    neomacs-alias
     # Emacs
     #Doom dependencies
     gnutls
@@ -234,10 +249,10 @@ in
     glib
     gsettings-desktop-schemas
     hyprcursor
- 
+
     #daemons
     mpd
-   
+
     #Apps
     mpv
     kitty
@@ -255,13 +270,13 @@ in
     obs-studio
     xournalpp
     pdfarranger
-    karere 
+    karere
     texlivePackages.latexmk
     texliveFull
     # openboard
     # krita
     # jetbrains.idea
-    (jetbrains.plugins.addPlugins jetbrains.idea[ scala ])
+    (jetbrains.plugins.addPlugins jetbrains.idea [scala])
     android-studio
     android-tools
     kdbg
@@ -272,7 +287,7 @@ in
     gtk3
     zotero
     # weechat
-    (python3.withPackages (ps: [ ps.jupyter ps.matplotlib ]))
+    (python3.withPackages (ps: [ps.jupyter ps.matplotlib]))
     wireguard-tools
     proton-vpn
     pgadmin4-desktopmode
@@ -281,19 +296,19 @@ in
     zathura
   ];
 
-    # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+  # It is sometimes useful to fine-tune packages, for example, by applying
+  # # overrides. You can do that directly here, just don't forget the
+  # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+  # # fonts?
+  # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  
+  # # You can also create simple shell scripts directly inside your
+  # # configuration. For example, this adds a command 'my-hello' to your
+  # # environment:
+  # (pkgs.writeShellScriptBin "my-hello" ''
+  #   echo "Hello, ${config.home.username}!"
+  # '')
+
   programs.ghostty = {
     enableZshIntegration = true;
     enableFishIntegration = true;
@@ -355,7 +370,7 @@ in
     enableZshIntegration = true;
   };
   programs.fzf = {
-    enable = true;              # Fuzzy command history search
+    enable = true; # Fuzzy command history search
     enableBashIntegration = true; # Tab completion for Bash
     enableZshIntegration = true;
   };
@@ -366,18 +381,18 @@ in
     git = true;
     icons = "always";
     colors = "always";
-    extraOptions = [ "--no-quotes" ];
+    extraOptions = ["--no-quotes"];
   };
   programs.bat = {
     enable = true;
     themes = {
       wilmersdorf = {
         src = pkgs.fetchFromGitHub {
-        owner = "projases";
-        repo = "wilmersdorf-bat";
-        rev = "main";
-        sha256 = "sha256-+bWiOmpa/cf6+O0C2pvdKd++jFh3R9Z/drMTx3sV+R4=";
-      }; 
+          owner = "projases";
+          repo = "wilmersdorf-bat";
+          rev = "main";
+          sha256 = "sha256-+bWiOmpa/cf6+O0C2pvdKd++jFh3R9Z/drMTx3sV+R4=";
+        };
         file = "wilmersdorf.tmTheme";
       };
     };
@@ -389,7 +404,7 @@ in
       batgrep
     ];
   };
-  programs.mpv.scripts = [ pkgs.mpvScripts.mpris ];
+  programs.mpv.scripts = [pkgs.mpvScripts.mpris];
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -452,7 +467,6 @@ in
       Categories=Utility;TextEditor;
       MimeType=text/plain;
     '';
-
   };
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
@@ -476,8 +490,7 @@ in
     QT_QPA_PLATFORMTHEME = "qt6ct";
     QT_STYLE_OVERRIDE = "kvantum-dark";
     EDITOR = "emacs";
-    QS_ICON_THEME="kora";
-
+    QS_ICON_THEME = "kora";
   };
 
   # Let Home Manager install and manage itself.

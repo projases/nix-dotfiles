@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.noctalia = {
     enable = true;
     # v4 "colors" became a v5 custom palette (its palette JSON uses the same
@@ -8,22 +11,22 @@
     # ~/.config/noctalia/palettes/Wilmersdorf.json
     customPalettes.Wilmersdorf = {
       dark = {
-        mPrimary = "#90a6db";          # key2 - brighter blue accent
-        mOnPrimary = "#18191f";        # bg00
-        mSecondary = "#5b94ab";        # str - teal strings
-        mOnSecondary = "#18191f";      # bg00
-        mTertiary = "#b0a2e7";         # str - magenta accent
-        mOnTertiary = "#18191f";       # bg00
-        mError = "#e1c1ee";            # warning/magenta - soft pink
-        mOnError = "#18191f";          # bg00
-        mSurface = "#282b33";          # bg1 - main background
-        mOnSurface = "#ababab";        # fg2 - dimmed foreground
-        mSurfaceVariant = "#1f2024";   # bg0 - slightly darker surface
+        mPrimary = "#90a6db"; # key2 - brighter blue accent
+        mOnPrimary = "#18191f"; # bg00
+        mSecondary = "#5b94ab"; # str - teal strings
+        mOnSecondary = "#18191f"; # bg00
+        mTertiary = "#b0a2e7"; # str - magenta accent
+        mOnTertiary = "#18191f"; # bg00
+        mError = "#e1c1ee"; # warning/magenta - soft pink
+        mOnError = "#18191f"; # bg00
+        mSurface = "#282b33"; # bg1 - main background
+        mOnSurface = "#ababab"; # fg2 - dimmed foreground
+        mSurfaceVariant = "#1f2024"; # bg0 - slightly darker surface
         mOnSurfaceVariant = "#6e7899"; # comment
-        mOutline = "#41454b";          # bg3 - subtle borders
-        mShadow = "#18191f";           # bg00
-        mHover = "#34373e";            # bg2 - hover background
-        mOnHover = "#d3d3d3";          # fg0
+        mOutline = "#41454b"; # bg3 - subtle borders
+        mShadow = "#18191f"; # bg00
+        mHover = "#34373e"; # bg2 - hover background
+        mOnHover = "#d3d3d3"; # fg0
         terminal = {
           background = "#282b33";
           foreground = "#ababab";
@@ -104,18 +107,30 @@
     settings = {
       theme = {
         mode = "dark";
-        source = "custom";              # v4 colorSchemes.predefinedScheme/colors
+        source = "custom"; # v4 colorSchemes.predefinedScheme/colors
         custom_palette = "Wilmersdorf";
       };
 
       idle = {
-        behavior_order = [ "custom" "lock" "screen-off" "suspend"];
+        behavior_order = ["lock" "screen-off" "suspend"];
         pre_action_fade_seconds = 5.0;
         behavior = {
-          "custom" = { timeout = 300; action = "command" ; command = "notify-send 'Idle timeout reached'"; enabled = true; };
-          lock = { timeout = 660; action = "lock"; enabled = true; };
-          "screen-off" = { timeout = 600; action = "screen_off"; enabled = true; };
-          suspend = { timeout = 900; action = "suspend"; enabled = true; };
+          # "custom" = { timeout = 300; action = "command" ; command = "notify-send 'Idle timeout reached'"; enabled = true; };
+          lock = {
+            timeout = 660;
+            action = "lock";
+            enabled = true;
+          };
+          "screen-off" = {
+            timeout = 600;
+            action = "screen_off";
+            enabled = true;
+          };
+          suspend = {
+            timeout = 900;
+            action = "suspend";
+            enabled = true;
+          };
         };
       };
 
@@ -125,15 +140,15 @@
         enabled = true;
         directory = "~/Pictures/Wallpapers";
         default.path = "~/Pictures/Wallpapers/highland_cattle.jpg";
-        automation = { recursive = false; }; # was recursiveSearch
+        automation = {recursive = false;}; # was recursiveSearch
       };
 
       # v4 general.* + ui.*
       shell = {
         avatar_path = "~/Pictures/icons/lambda_m.png"; # was general.avatarImage
         # corner_radius_scale = 1.0;                     # was general.radiusRatio
-        font_family = "Inter";                         # was ui.fontDefault
-        clipboard_enabled = true;                      # was appLauncher.enableClipboardHistory
+        font_family = "Inter"; # was ui.fontDefault
+        clipboard_enabled = true; # was appLauncher.enableClipboardHistory
 
         # v4 ui.fontFixed / tooltipsEnabled and customLaunchPrefix dropped;
         # terminalCommand auto-detected from $TERMINAL/Ghostty in v5
@@ -144,7 +159,7 @@
       };
 
       shell.screenshot = {
-        save_to_file = true;               
+        save_to_file = true;
         copy_to_clipboard = true;
         directory = "~/Pictures/Screenshots";
         annotate = true;
@@ -152,14 +167,29 @@
 
       # v4 sessionMenu.* (also floats: shell.panel.session_placement)
       shell.session = {
-        show_shortcuts = true;         # was showKeybinds  (largeButtons* -> grid below)
+        show_shortcuts = true; # was showKeybinds  (largeButtons* -> grid below)
         grid = false;
         actions = [
-          { action = "lock";     shortcut = "1"; }
-          { action = "suspend";  shortcut = "2"; }
-          { action = "reboot";   shortcut = "3"; }
-          { action = "logout";   shortcut = "4"; }
-          { action = "shutdown"; shortcut = "5"; }
+          {
+            action = "lock";
+            shortcut = "1";
+          }
+          {
+            action = "suspend";
+            shortcut = "2";
+          }
+          {
+            action = "reboot";
+            shortcut = "3";
+          }
+          {
+            action = "logout";
+            shortcut = "4";
+          }
+          {
+            action = "shutdown";
+            shortcut = "5";
+          }
         ];
       };
 
@@ -172,8 +202,8 @@
       # respectExpireTimeout dropped; clearDismissed inverts to keep_*)
       notification = {
         enable_daemon = true;
-        layer = "overlay";             # was overlayLayer
-        background_opacity = 1.0;      # was backgroundOpacity
+        layer = "overlay"; # was overlayLayer
+        background_opacity = 1.0; # was backgroundOpacity
         keep_dismissed_in_history = false; # was clearDismissed
         offset_x = 20;
         offset_y = 8;
@@ -181,19 +211,19 @@
       # v4 notifications.location / enableKeyboardLayoutToast
       osd = {
         position = "top_right";
-        kinds = { keyboard_layout = true; };
+        kinds = {keyboard_layout = true;};
       };
 
       # v4 brightness.* (brightnessStep dropped in v5)
       brightness = {
-        enable_ddcutil = false;        # was enableDdcSupport
-        minimum_brightness = 0.05;     # was enforceMinimum
+        enable_ddcutil = false; # was enableDdcSupport
+        minimum_brightness = 0.05; # was enforceMinimum
       };
 
       # v4 appLauncher.* -> shell.launcher
       shell.launcher = {
-        sort_by_usage = true;          # was sortByMostUsed
-        pinned = [ ];                  # was pinnedExecs
+        sort_by_usage = true; # was sortByMostUsed
+        pinned = []; # was pinnedExecs
       };
 
       # v4 idle.* (uncommented) -> [idle.behavior.*]
@@ -203,13 +233,13 @@
       #   behavior.lock = { timeout = 660; action = "lock"; enabled = true; };
       # };
 
-      dock = { enabled = false; };
+      dock = {enabled = false;};
 
       # v4 bar.* -> [bar.main]; density has no direct equivalent, so
       # thickness/padding/scale approximate the old "compact" density
       bar.main = {
         position = "top";
-        capsule = false;               # was showCapsule
+        capsule = false; # was showCapsule
         thickness = 30;
         padding = 8;
         margin_ends = 0;
@@ -217,9 +247,9 @@
         widget_spacing = 4;
         font_scale = 0.95;
         concave_edge_corners = true;
-        start  = [ "control-center" ];   # was ControlCenter
-        center = [ "workspaces" ];       # was Workspace (labelMode lost)
-        end    = [ "clock" "network" "bluetooth" "tray" ]; # was Clock WiFi Bluetooth Tray
+        start = ["control-center"]; # was ControlCenter
+        center = ["workspaces"]; # was Workspace (labelMode lost)
+        end = ["clock" "network" "bluetooth" "tray"]; # was Clock WiFi Bluetooth Tray
       };
 
       # per-widget options live under [widget.<name>]
@@ -227,21 +257,21 @@
         custom_image = "~/Pictures/icons/NixOS.png"; # was customAvatarImage
       };
       widget.clock = {
-        format = "{:%H:%M %a}";     # was formatHorizontal "HH:mm ddd"
+        format = "{:%H:%M %a}"; # was formatHorizontal "HH:mm ddd"
         vertical_format = "{:%H:%M}"; # was formatVertical
-        font_family = "monospace";  # was useMonospacedFont
-        color = "primary";          # was usePrimaryColor
+        font_family = "monospace"; # was useMonospacedFont
+        color = "primary"; # was usePrimaryColor
       };
 
       widget.workspaces = {
-        show_labels = false;         # was showWorkspaceLabels
-        pill_scale = 0.8;              # was pillScale
+        show_labels = false; # was showWorkspaceLabels
+        pill_scale = 0.8; # was pillScale
       };
 
       widget.network = {
         # show_icon = true;            # was showNetworkIcon
         # show_name = false;           # was showNetworkName
-        show_label = false;          # was showNetworkLabel
+        show_label = false; # was showNetworkLabel
       };
 
       # v4 location.* (monthBeforeDay is locale-driven in v5; name -> address)

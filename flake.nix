@@ -24,7 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     sf-mono-liga-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
@@ -36,46 +35,62 @@
 
     mistral-vibe.url = "github:mistralai/mistral-vibe";
 
+    neomacs = {
+      url = "github:eval-exec/neomacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, mistral-vibe, sf-mono-liga-src, zen-browser, opencode-nix, nix-claude-code, helium, ... }@inputs:
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    mistral-vibe,
+    sf-mono-liga-src,
+    zen-browser,
+    opencode-nix,
+    nix-claude-code,
+    helium,
+    neomacs,
+    ...
+  } @ inputs: let
+    overlays = import ./overlays {inherit sf-mono-liga-src;};
 
-  let 
-    overlays = import ./overlays { inherit sf-mono-liga-src; };
+    mkHost = hostPath:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
 
-  mkHost = hostPath: nixpkgs.lib.nixosSystem {
-    specialArgs = { inherit inputs; };
+        modules = [
+          "${hostPath}/hardware-configuration.nix"
+          "${hostPath}/configuration.nix"
 
-    modules = [
-      "${hostPath}/hardware-configuration.nix"
-      "${hostPath}/configuration.nix"
+          # make overlay visible to this host
+          {
+            nixpkgs.overlays = [
+              overlays.sf-mono-liga
+              overlays.lager-boost-fix
+              overlays.wireshark-fix
+              # overlays.tree-sitter-fix
+              inputs.opencode-nix.overlays.default
+              # inputs.nix-claude-code.overlays.default
+            ];
+          }
 
-      # make overlay visible to this host
-      { nixpkgs.overlays = [
-          overlays.sf-mono-liga
-          overlays.lager-boost-fix
-          overlays.wireshark-fix
-          # overlays.tree-sitter-fix
-          inputs.opencode-nix.overlays.default
-          # inputs.nix-claude-code.overlays.default
+          inputs.noctalia.nixosModules.default
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.pablo = import ./home-manager/home.nix;
+              extraSpecialArgs = {inherit inputs zen-browser helium;};
+            };
+          }
         ];
-      }
-
-      inputs.noctalia.nixosModules.default
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.pablo = import ./home-manager/home.nix;
-          extraSpecialArgs = { inherit inputs zen-browser helium; };
-        };
-      }
-    ];
-  };
+      };
   in {
     nixosConfigurations.laniakea = mkHost ./systems/laniakea;
-    nixosConfigurations.macnix  = mkHost ./systems/macnix;
+    nixosConfigurations.macnix = mkHost ./systems/macnix;
   };
 }
