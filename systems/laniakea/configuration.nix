@@ -476,7 +476,7 @@
   };
 
   environment.variables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
   };
 
   # List services that you want to enable:

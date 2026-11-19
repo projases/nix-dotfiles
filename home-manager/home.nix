@@ -285,8 +285,6 @@ in {
     openjfx21
     libGL
     gtk3
-    zotero
-    # weechat
     (python3.withPackages (ps: [ps.jupyter ps.matplotlib]))
     wireguard-tools
     proton-vpn
@@ -487,7 +485,7 @@ in {
   home.sessionVariables = {
     HDY_COLOR_SCHEME = "dark";
     GTK_THEME = "Adwaita-dark";
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    # QT_QPA_PLATFORMTHEME = "qt6ct";
     QT_STYLE_OVERRIDE = "kvantum-dark";
     EDITOR = "emacs";
     QS_ICON_THEME = "kora";
