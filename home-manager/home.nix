@@ -165,6 +165,7 @@ in {
     name = "Neomacs";
     comment = "emacs with a rust core";
     exec = "neomacs %F";
+    icon = "${config.home.homeDirectory}/Pictures/icons/neomacs.png";
     terminal = false;
   };
   # services.blueman-applet.enable = true;
@@ -402,6 +403,7 @@ in {
       batgrep
     ];
   };
+
   programs.mpv.scripts = [pkgs.mpvScripts.mpris];
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
